@@ -11,6 +11,8 @@ group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.12"
   gem "jekyll-paginate"
   gem "jekyll-seo-tag"
+  gem "jekyll-sitemap"
+  gem "jekyll-compose"
   # Lunr.js 검색은 수동으로 구현할 것이므로 플러그인은 사용하지 않음
 end
 
