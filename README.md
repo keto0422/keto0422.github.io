@@ -1,34 +1,53 @@
 # Keto's Blog
 
-이 저장소는 [Jekyll](https://jekyllrb.com/)을 사용한 블로그입니다.
+This repository contains a Jekyll-based blog focused on security write-ups.
 
-## 개발 환경 설정
+## Setup
 
 ```bash
 bundle install
 ```
 
-로컬 서버 실행:
+Run the local server:
 
 ```bash
 bundle exec jekyll serve
 ```
 
-## 새 글 작성하기
+## Create a New Post
 
-[jekyll-compose](https://github.com/jekyll/jekyll-compose) 플러그인을 사용하여 손쉽게 새 글과 초안을 생성할 수 있습니다.
+This project uses [jekyll-compose](https://github.com/jekyll/jekyll-compose) to create posts and drafts quickly.
 
-새 글(post) 생성:
-
-```bash
-bin/new-post "제목"
-```
-
-초안(draft) 생성:
+Create a post:
 
 ```bash
-bin/new-draft "제목"
+bin/new-post "Post title"
 ```
 
-생성된 파일을 수정하여 내용을 작성한 후 커밋하면 됩니다.
+Create a draft:
 
+```bash
+bin/new-draft "Draft title"
+```
+
+## Import Notion Export
+
+You can import a Notion `Markdown & CSV` export zip directly into this blog:
+
+```bash
+bin/import-notion-export exported.zip
+```
+
+Options:
+
+```bash
+bin/import-notion-export exported.zip --date 2026-02-11 --author "Keto"
+bin/import-notion-export exported.zip --dry-run
+```
+
+What it does:
+
+- Automatically extracts nested zip files (`ExportBlock-...Part-1.zip`)
+- Converts `.md` files into `_posts/YYYY-MM-DD-slug.md`
+- Copies attachments/images to `assets/notion/<import-token>/...` and rewrites links
+- Stores exported `.csv` files in `assets/notion/<import-token>/tables/...`

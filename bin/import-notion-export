@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+if command -v bundle >/dev/null 2>&1; then
+  bundle exec ruby scripts/import_notion_export.rb "$@"
+else
+  ruby scripts/import_notion_export.rb "$@"
+fi

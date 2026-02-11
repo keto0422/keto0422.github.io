@@ -1,31 +1,36 @@
-# 사이트 기본 설정
+# Site settings
 title: Keto's blog
 email: jsw5203@gmail.com
 description: >- 
   Pwnable Blog
-baseurl: "" # 서브 경로가 있는 경우 "/blog"와 같이 설정
-url: "https://keto0422.github.io" # 사이트 URL
+baseurl: "" # Set to "/blog" if you publish under a subpath
+url: "https://keto0422.github.io" # Site URL
+lang: "en-US"
+timezone: "Asia/Seoul"
 
 
 
-# 소셜 미디어 정보
+# Social media
 twitter_username: 
 github_username: 
 
-# 블로그 설정
+# Blog settings
 permalink: /:year/:month/:day/:title/
 paginate: 5
 paginate_path: "/page:num/"
 
-# 빌드 설정
+# Build settings
 markdown: kramdown
 theme: minima
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
 plugins:
   - jekyll-feed
   - jekyll-paginate
   - jekyll-seo-tag
   - jekyll-sitemap
-# 제외할 파일/폴더
+# Excluded files/folders
 exclude:
   - .sass-cache/
   - .jekyll-cache/
@@ -36,7 +41,7 @@ exclude:
   - vendor/
   - bin/
 
-# 기본 레이아웃과 포맷
+# Default layout and values
 defaults:
   -
     scope:
@@ -46,5 +51,5 @@ defaults:
       layout: "post"
       author: "Keto"
 
-# 검색 기능은 수동으로 구현
-# search.json 파일과 search.md 페이지를 별도로 생성해야 함
+# Search is implemented manually
+# Keep both search.json and search.md

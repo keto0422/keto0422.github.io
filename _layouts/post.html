@@ -1,0 +1,107 @@
+---
+layout: default
+---
+<article class="post writeup-post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header writeup-hero">
+    <p class="writeup-eyebrow">Security Write-up</p>
+    <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+        {{ page.date | date: "%Y.%m.%d" }}
+      </time>
+      {% if page.author %}
+      <span class="post-author">{{ page.author | escape }}</span>
+      {% endif %}
+      {% assign read_words = content | number_of_words %}
+      <span class="post-reading-time">{{ read_words | divided_by: 230 | plus: 1 }} min read</span>
+    </p>
+    {% if page.categories or page.tags %}
+    <ul class="post-taxonomy">
+      {% for category in page.categories %}
+      <li class="taxonomy-item taxonomy-category">{{ category }}</li>
+      {% endfor %}
+      {% for tag in page.tags %}
+      <li class="taxonomy-item taxonomy-tag">#{{ tag }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </header>
+
+  <div class="writeup-shell">
+    <div class="post-content e-content prose" itemprop="articleBody">
+      {{ content }}
+    </div>
+  </div>
+
+  <div class="outline-hover-rail" id="outline-rail" aria-label="Table of contents">
+    <button type="button" class="outline-handle" id="outline-handle" aria-label="Open table of contents">
+      <span class="outline-handle-icon">≡</span>
+      <span class="outline-handle-text">Outline</span>
+    </button>
+    <aside class="writeup-outline">
+      <strong>Outline</strong>
+      <nav id="outline-nav"></nav>
+    </aside>
+  </div>
+
+  <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+</article>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var nav = document.getElementById("outline-nav");
+  var rail = document.getElementById("outline-rail");
+  var handle = document.getElementById("outline-handle");
+  if (!nav) {
+    return;
+  }
+
+  var headings = document.querySelectorAll(".prose h2, .prose h3");
+  if (!headings.length) {
+    nav.innerHTML = "<p class=\"outline-empty\">The outline is generated automatically when headings exist.</p>";
+    if (rail) {
+      rail.classList.add("outline-empty-state");
+    }
+    return;
+  }
+
+  var list = document.createElement("ul");
+  list.className = "outline-list";
+
+  headings.forEach(function (heading, index) {
+    if (!heading.id) {
+      heading.id = "section-" + (index + 1);
+    }
+
+    var item = document.createElement("li");
+    item.className = heading.tagName === "H3" ? "outline-item outline-depth-3" : "outline-item";
+
+    var link = document.createElement("a");
+    link.href = "#" + heading.id;
+    link.textContent = heading.textContent.trim();
+
+    item.appendChild(link);
+    list.appendChild(item);
+  });
+
+  nav.appendChild(list);
+
+  if (handle && rail) {
+    handle.addEventListener("click", function () {
+      rail.classList.toggle("is-open");
+    });
+
+    document.addEventListener("click", function (event) {
+      if (!rail.contains(event.target)) {
+        rail.classList.remove("is-open");
+      }
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        rail.classList.remove("is-open");
+      }
+    });
+  }
+});
+</script>
