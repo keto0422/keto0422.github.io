@@ -16,10 +16,11 @@ This blog is dedicated to CTF write-ups and 1-day exploit analysis posts.
 | 2025 | DEFCON — Finals | **10th place (cold fusion)** |
 | 2025 | Lake CTF — Finals | **6th place (CyKor)** |
 | 2026 | DEFCON — Qualifier | **3rd place (cold fusion)** |
+| 2026 | DEFCON — Finals | **4th place (cold fusion)** |
 
 ### 0-day Research
 
 | Vendor | Bounty |
 | --- | --- |
-| Qualcomm | **$2,000** |
+| Qualcomm | **$14,000** |
 | V8 | **$3,000** |
